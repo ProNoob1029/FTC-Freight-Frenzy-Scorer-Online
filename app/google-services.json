@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "365849288534",
+    "firebase_url": "https://ftc-freight-frenzy-scorer-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "ftc-freight-frenzy-scorer",
+    "storage_bucket": "ftc-freight-frenzy-scorer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365849288534:android:7ee3096cb24a84d78ac0f7",
+        "android_client_info": {
+          "package_name": "com.google.firebase.quickstart.database"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365849288534-rtiv4g5tdqhmp2ljnb74kenscjk2bcqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2MIIH-aqhRYCWWFHkAGWSPDP-7W1RO58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365849288534-rtiv4g5tdqhmp2ljnb74kenscjk2bcqn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365849288534:android:1767a6ad39ce51548ac0f7",
+        "android_client_info": {
+          "package_name": "com.phoenixro026.ftcfreightfrenzyscoreronline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365849288534-rtiv4g5tdqhmp2ljnb74kenscjk2bcqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2MIIH-aqhRYCWWFHkAGWSPDP-7W1RO58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365849288534-rtiv4g5tdqhmp2ljnb74kenscjk2bcqn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

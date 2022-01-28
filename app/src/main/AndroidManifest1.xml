@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.phoenixro026.ftcfreightfrenzyscoreronline">
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <application
+        android:allowBackup="true"
+        android:fullBackupOnly="true"
+        android:icon="@mipmap/ic_launcher_phoenix_vector"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_phoenix_vector_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FTC_FREIGHTFRENZY_Scorer">
+        <activity
+            android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.ScorerActivity"
+            android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.ListActivity" />
+        <activity android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.ScorerActivityView" />
+    </application>
+
+</manifest>

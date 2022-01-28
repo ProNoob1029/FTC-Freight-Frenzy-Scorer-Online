@@ -1,0 +1,1390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.phoenixro026.ftc_freight_frenzy_scorer.ScorerActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            style="@style/bg_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_title"
+                style="@style/text_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTintMode="src_atop"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/score_match"
+                android:textAlignment="center"
+                android:textAppearance="@style/text_theme"
+                android:textSize="34sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/button_team_red"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/team_red"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button_team_blue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_team_code" />
+
+                <TextView
+                    android:id="@+id/button_team_blue"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/team_blue"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/button_team_red"
+                    app:layout_constraintTop_toBottomOf="@+id/text_team_code" />
+
+                <EditText
+                    android:id="@+id/text_team_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:autofillHints="team name"
+                    android:fontFamily="sans-serif-medium"
+                    android:hint="@string/team_name"
+                    android:inputType="none"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textCursorDrawable="@color/zero"
+                    android:textSize="24sp"
+                    android:typeface="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/text_team_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:autofillHints="team name"
+                    android:fontFamily="sans-serif-medium"
+                    android:hint="@string/team_code"
+                    android:inputType="none"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="24sp"
+                    android:typeface="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_team_name" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_auto_total_points"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingStart="16dp"
+                    android:text="@string/autonomous_points"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_auto_total_points_nr"
+                    style="@style/text_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingEnd="16dp"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/freight_bonus"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_auto_hub_minus">
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switch_team_element_used"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/team_element_used"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textSize="24sp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/switch_freight_bonus"
+                        tools:visibility="visible" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switch_freight_bonus"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/freight_bonus"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_auto_storage_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="@+id/switch_duck_delivery"
+                    app:layout_constraintTop_toBottomOf="@+id/switch_duck_delivery"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_auto_hub_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="@+id/switch_duck_delivery"
+                    app:layout_constraintTop_toBottomOf="@+id/button_auto_storage_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_auto_storage_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/button_auto_storage_plus"
+                    app:layout_constraintTop_toTopOf="@+id/button_auto_storage_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_auto_hub_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/button_auto_storage_plus"
+                    app:layout_constraintTop_toTopOf="@+id/button_auto_hub_plus" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_duck_delivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/duck_delivery"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_auto_parked_in_storage"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/parked_in_storage"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/freight_bonus" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_auto_parked_in_warehouse"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/parked_in_warehouse"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/switch_auto_parked_in_storage" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_auto_parked_fully"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/fully_parked"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="24sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/switch_auto_parked_in_warehouse"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/text_auto_storage"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/freight_in_storage"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_auto_storage_nr"
+                    app:layout_constraintEnd_toStartOf="@+id/text_auto_storage_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_auto_storage_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_auto_hub"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/freight_in_hub"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_auto_hub_nr"
+                    app:layout_constraintEnd_toStartOf="@+id/text_auto_hub_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_auto_hub_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_auto_storage_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_auto_storage_minus"
+                    app:layout_constraintEnd_toStartOf="@+id/button_auto_storage_minus"
+                    app:layout_constraintStart_toEndOf="@+id/text_auto_storage"
+                    app:layout_constraintTop_toTopOf="@+id/button_auto_storage_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_auto_hub_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_auto_hub_minus"
+                    app:layout_constraintEnd_toEndOf="@+id/text_auto_storage_nr"
+                    app:layout_constraintStart_toStartOf="@+id/text_auto_storage_nr"
+                    app:layout_constraintTop_toTopOf="@+id/button_auto_hub_minus"
+                    tools:ignore="TextContrastCheck" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_driver_total_points"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingStart="16dp"
+                    android:text="@string/driver_controlled_points"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_total_points_nr"
+                    style="@style/text_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingEnd="16dp"
+                    android:text="@string/zero"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text_driver_storage"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/freight_in_storage"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintEnd_toStartOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_driver_storage_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_hub_l1"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/freight_in_hub_l1"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_driver_hub_l1_nr"
+                    app:layout_constraintEnd_toStartOf="@+id/text_driver_hub_l1_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_driver_hub_l1_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_hub_l2"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/freight_in_hub_l2"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_driver_hub_l2_nr"
+                    app:layout_constraintEnd_toStartOf="@+id/text_driver_hub_l2_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_driver_hub_l2_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_hub_l3"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/freight_in_hub_l3"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_driver_hub_l3_nr"
+                    app:layout_constraintEnd_toStartOf="@id/text_driver_hub_l3_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_driver_hub_l3_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_shared"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/freight_in_shared"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_driver_shared_nr"
+                    app:layout_constraintEnd_toStartOf="@+id/text_driver_shared_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_driver_shared_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_storage_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_driver_storage_minus"
+                    app:layout_constraintEnd_toStartOf="@+id/button_driver_storage_minus"
+                    app:layout_constraintStart_toEndOf="@+id/text_driver_storage"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_storage_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_hub_l1_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_driver_hub_l1_minus"
+                    app:layout_constraintEnd_toEndOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintStart_toStartOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_hub_l1_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_hub_l2_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_driver_hub_l2_minus"
+                    app:layout_constraintEnd_toEndOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintStart_toStartOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_hub_l2_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_hub_l3_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_driver_hub_l3_minus"
+                    app:layout_constraintEnd_toEndOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintStart_toStartOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_hub_l3_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_driver_shared_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_driver_shared_minus"
+                    app:layout_constraintEnd_toEndOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintStart_toStartOf="@+id/text_driver_storage_nr"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_shared_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_storage_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/button_driver_storage_plus"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_storage_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_hub_l1_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/button_driver_hub_l1_plus"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_hub_l1_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_hub_l2_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/button_driver_hub_l2_plus"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_hub_l2_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_hub_l3_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/button_driver_hub_l3_plus"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_hub_l3_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_shared_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/button_driver_shared_plus"
+                    app:layout_constraintTop_toTopOf="@+id/button_driver_shared_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_storage_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_hub_l1_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_driver_storage_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_hub_l2_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_driver_hub_l1_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_hub_l3_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_driver_hub_l2_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_driver_shared_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_driver_hub_l3_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_endgame_total_points"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingStart="16dp"
+                    android:text="@string/endgame_points"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_endgame_total_points_nr"
+                    style="@style/text_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingEnd="16dp"
+                    android:text="@string/zero"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_endgame_parked"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/switch_endgame_leaning_shared">
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switch_endgame_parked"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/parked"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switch_endgame_parked_fully"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/fully_parked"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textSize="24sp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/switch_endgame_parked"
+                        tools:visibility="visible" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_endgame_balanced_shipping"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/balanced_shipping_hub"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_endgame_carousel_plus" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_endgame_leaning_shared"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/leaning_shared_hub"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/switch_endgame_balanced_shipping" />
+
+                <TextView
+                    android:id="@+id/text_endgame_carousel"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/carousel_ducks"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_endgame_carousel_nr"
+                    app:layout_constraintEnd_toStartOf="@+id/text_endgame_carousel_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_endgame_carousel_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_endgame_capping"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/capping"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@id/text_endgame_capping_nr"
+                    app:layout_constraintEnd_toStartOf="@id/text_endgame_capping_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_endgame_capping_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_endgame_carousel_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_endgame_carousel_minus"
+                    app:layout_constraintEnd_toStartOf="@+id/button_endgame_carousel_minus"
+                    app:layout_constraintStart_toEndOf="@+id/text_endgame_carousel"
+                    app:layout_constraintTop_toTopOf="@+id/button_endgame_carousel_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_endgame_capping_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@id/button_endgame_capping_minus"
+                    app:layout_constraintEnd_toStartOf="@id/button_endgame_capping_minus"
+                    app:layout_constraintStart_toEndOf="@id/text_endgame_capping"
+                    app:layout_constraintTop_toTopOf="@id/button_endgame_capping_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_endgame_carousel_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/button_endgame_carousel_plus"
+                    app:layout_constraintTop_toTopOf="@+id/button_endgame_carousel_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_endgame_capping_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/button_endgame_capping_plus"
+                    app:layout_constraintTop_toTopOf="@id/button_endgame_capping_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_endgame_carousel_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_endgame_capping_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_endgame_parked"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_penalties"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingStart="16dp"
+                    android:text="@string/penalties"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_penalties_nr"
+                    style="@style/text_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingEnd="16dp"
+                    android:text="@string/zero"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_penalties_major"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/major"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@id/text_penalties_major_nr"
+                    app:layout_constraintEnd_toStartOf="@id/text_penalties_major_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_penalties_major_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_penalties_major_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@id/button_penalties_major_minus"
+                    app:layout_constraintEnd_toEndOf="@id/text_penalties_minor_nr"
+                    app:layout_constraintStart_toStartOf="@id/text_penalties_minor_nr"
+                    app:layout_constraintTop_toTopOf="@id/button_penalties_major_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_penalties_major_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_penalties_minor_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <TextView
+                    android:id="@+id/text_penalties_minor"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/minor"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@id/text_penalties_minor_nr"
+                    app:layout_constraintEnd_toStartOf="@id/text_penalties_minor_nr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_penalties_minor_nr"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_penalties_minor_nr"
+                    style="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@id/button_penalties_minor_minus"
+                    app:layout_constraintEnd_toStartOf="@id/button_penalties_minor_minus"
+                    app:layout_constraintStart_toEndOf="@id/text_penalties_minor"
+                    app:layout_constraintTop_toTopOf="@id/button_penalties_minor_minus"
+                    tools:ignore="TextContrastCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_penalties_minor_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/button_penalties_minor_plus"
+                    app:layout_constraintTop_toTopOf="@id/button_penalties_minor_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_penalties_major_minus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/minus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/button_penalties_major_plus"
+                    app:layout_constraintTop_toTopOf="@id/button_penalties_major_plus"
+                    tools:ignore="DuplicateSpeakableTextCheck,TooManyViews" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_penalties_minor_plus"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTintMode="add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="@string/plus"
+                    android:textSize="24sp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                tools:ignore="TooManyViews">
+
+                <TextView
+                    android:id="@+id/text_total"
+                    style="@style/text_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingStart="16dp"
+                    android:text="@string/total_points"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="34sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/text_total_nr"
+                    style="@style/text_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:backgroundTintMode="src_atop"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingEnd="16dp"
+                    android:text="@string/zero"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+                    android:textSize="34sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry,TextContrastCheck" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_save"
+                style="@style/text_theme"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button_shape"
+                android:backgroundTintMode="add"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="sans-serif-medium"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/save"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_penalties_minor_plus"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sample_main_layout"
+    style="@style/bg_theme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/list_text_title"
+        style="@style/text_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:backgroundTintMode="src_atop"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/score_match"
+        android:textAlignment="center"
+        android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
+        android:textSize="34sp"
+        tools:ignore="TextContrastCheck" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+
+</LinearLayout>
