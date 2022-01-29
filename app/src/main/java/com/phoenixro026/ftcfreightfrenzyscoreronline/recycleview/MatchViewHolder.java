@@ -31,7 +31,7 @@ import com.phoenixro026.ftcfreightfrenzyscoreronline.ScorerActivityView;
 class MatchViewHolder extends RecyclerView.ViewHolder {
     private final TextView matchItemView;
     private final TextView dateItemView;
-    private int mMatch;
+    private String mMatch;
 
     private MatchViewHolder(View itemView) {
         super(itemView);
@@ -44,7 +44,7 @@ class MatchViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void bind(String text, String date, int match) {
+    public void bind(String text, String date, String match) {
         matchItemView.setText(text);
         dateItemView.setText(date);
         mMatch = match;

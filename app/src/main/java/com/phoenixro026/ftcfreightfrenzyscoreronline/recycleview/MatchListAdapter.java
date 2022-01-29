@@ -8,12 +8,20 @@ import androidx.recyclerview.widget.ListAdapter;
 
 import com.phoenixro026.ftcfreightfrenzyscoreronline.database.Match;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class MatchListAdapter extends ListAdapter<Match, MatchViewHolder> {
 
     public MatchListAdapter(@NonNull DiffUtil.ItemCallback<Match> diffCallback) {
         super(diffCallback);
+
+    }
+
+    @Override
+    public void submitList(final List<Match> list) {
+        super.submitList(list != null ? new ArrayList<>(list) : null);
     }
 
     @NonNull

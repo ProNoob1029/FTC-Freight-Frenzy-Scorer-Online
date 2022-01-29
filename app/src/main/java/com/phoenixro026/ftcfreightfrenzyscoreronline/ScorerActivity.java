@@ -3,20 +3,20 @@ package com.phoenixro026.ftcfreightfrenzyscoreronline;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.phoenixro026.ftcfreightfrenzyscoreronline.database.Match;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.databinding.ActivityScorerBinding;
-import com.phoenixro026.ftcfreightfrenzyscoreronline.recycleview.MatchViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class ScorerActivity extends AppCompatActivity{
 
@@ -62,13 +62,16 @@ public class ScorerActivity extends AppCompatActivity{
     //Total
     public int totalPoints = 0;
 
-    private MatchViewModel mMatchViewModel;
+    //private MatchViewModel mMatchViewModel;
 
-    String key;
-    int matchId;
-    List<Match> matchList;
+    //String key;
+    //int matchId;
+    //List<Match> matchList;
 
-    Match currentMatch;
+    //Match currentMatch;
+
+    DatabaseReference mRootRef;
+    DatabaseReference mMatchesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,25 +80,52 @@ public class ScorerActivity extends AppCompatActivity{
         View view = binding.getRoot();
         setContentView(view);
 
-        Vibrator myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+        Vibrator vib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
-        mMatchViewModel = new ViewModelProvider(this).get(MatchViewModel.class);
+        //mMatchViewModel = new ViewModelProvider(this).get(MatchViewModel.class);
 
-        Bundle extras = getIntent().getExtras();
+        /*Bundle extras = getIntent().getExtras();
         if (extras != null) {
             key = extras.getString("key");
             matchId = extras.getInt("id");
             //The key argument here must match that used in the other activity
-        }
+        }*/
 
-        mMatchViewModel.getAllMatches().observe(this, newMatchList -> {
+        /*mMatchViewModel.getAllMatches().observe(this, newMatchList -> {
             // Update the cached copy of the words in the adapter.
             matchList = newMatchList;
             convertToMatch();
             if(key.contentEquals("edit"))
                 InsertValues(view);
-        });
+        });*/
 
+
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mMatchesRef = mRootRef.child("matches");
+
+        setupOnClick(view, vib);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        /*mMatchesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String text = snapshot.getValue(String.class);
+
+                binding.textTeamName.setText(text);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+    }
+
+    public void setupOnClick(View view, Vibrator myVib){
         binding.buttonTeamRed.setOnClickListener(v -> {
             binding.buttonTeamRed.setTextAppearance(view.getContext(), R.style.button_theme);
             binding.buttonTeamRed.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.button_shape_red));
@@ -389,10 +419,28 @@ public class ScorerActivity extends AppCompatActivity{
             }
         });
 
-        binding.buttonSave.setOnClickListener(v -> Save() );
+        binding.buttonSave.setOnClickListener(v -> {
+            //Save();
+            String key = mMatchesRef.push().getKey();
+            MatchModel match = new MatchModel();
+            match.teamName = binding.textTeamName.getText().toString();
+            match.teamCode = binding.textTeamCode.getText().toString();
+            Calendar currentTime = Calendar.getInstance();
+            String min;
+            int calMin = currentTime.get(Calendar.MINUTE);
+            if(calMin < 10)
+                min = String.format(Locale.US, "0%d", calMin);
+            else min = String.format(Locale.US, "%d", calMin);
+            match.createTime = String.format(Locale.US, "%s %d %d:%s", new SimpleDateFormat("MMM", Locale.US).format(currentTime.getTime()), currentTime.get(Calendar.DAY_OF_MONTH), currentTime.get(Calendar.HOUR_OF_DAY), min);
+            Map<String , Object> updates = new HashMap<>();
+            Map<String, Object> map = match.toMap();
+            updates.put(key, map);
+            mMatchesRef.updateChildren(updates);
+            finish();
+        } );
     }
 
-    void convertToMatch(){
+    /*void convertToMatch(){
         int matchSize = matchList.size();
         for(int i = 0; i < matchSize; i++){
             if(matchList.get(i).id == matchId){
@@ -400,7 +448,7 @@ public class ScorerActivity extends AppCompatActivity{
                 break;
             }
         }
-    }
+    }*/
 
     public void CalculateAutoPoints() {
         autoTotalPoints = autoStorage * 2 + autoHub * 6;
@@ -456,7 +504,7 @@ public class ScorerActivity extends AppCompatActivity{
         binding.textTotalNr.setText(String.format(Locale.US, "%d", totalPoints));
     }
 
-    public void Save() {
+    /*public void Save() {
         teamName = binding.textTeamName.getText().toString();
         teamCode = binding.textTeamCode.getText().toString();
         if(!teamName.contentEquals("") && !teamCode.contentEquals("") && !teamColor.contentEquals("")){
@@ -520,9 +568,9 @@ public class ScorerActivity extends AppCompatActivity{
                 getApplicationContext(),
                 R.string.empty_not_saved,
                 Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
-    public void InsertValues(View view) {
+    /*public void InsertValues(View view) {
         binding.textTeamName.setText(currentMatch.teamName);
         binding.textTeamCode.setText(currentMatch.teamCode);
         if(currentMatch.teamColor.contentEquals("red")) {
@@ -615,5 +663,5 @@ public class ScorerActivity extends AppCompatActivity{
         if(endgameParked)
             binding.switchEndgameParkedFully.setVisibility(View.VISIBLE);
 
-    }
+    }*/
 }

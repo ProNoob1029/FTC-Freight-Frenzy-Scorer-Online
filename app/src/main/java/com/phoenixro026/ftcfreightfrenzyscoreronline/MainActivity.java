@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,5 +33,7 @@ public class MainActivity extends AppCompatActivity {
             myVib.vibrate(20);
             startActivity(new Intent(MainActivity.this, com.phoenixro026.ftcfreightfrenzyscoreronline.ListActivity.class));
         });
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 }

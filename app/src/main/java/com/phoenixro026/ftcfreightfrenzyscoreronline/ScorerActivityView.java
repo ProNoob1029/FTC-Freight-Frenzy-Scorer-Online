@@ -8,15 +8,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.phoenixro026.ftcfreightfrenzyscoreronline.database.Match;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.databinding.ActivityScorerViewBinding;
-import com.phoenixro026.ftcfreightfrenzyscoreronline.recycleview.MatchViewModel;
 
 import java.util.List;
-import java.util.Locale;
 
 public class ScorerActivityView extends AppCompatActivity{
 
@@ -63,7 +60,7 @@ public class ScorerActivityView extends AppCompatActivity{
     String key;
     int matchId;
     List<Match> matchList;
-    MatchViewModel mMatchViewModel;
+    //MatchViewModel mMatchViewModel;
 
     Match currentMatch;
 
@@ -76,7 +73,7 @@ public class ScorerActivityView extends AppCompatActivity{
 
         Vibrator myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
-        mMatchViewModel = new ViewModelProvider(this).get(MatchViewModel.class);
+        //mMatchViewModel = new ViewModelProvider(this).get(MatchViewModel.class);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -85,13 +82,13 @@ public class ScorerActivityView extends AppCompatActivity{
             //The key argument here must match that used in the other activity
         }
 
-        mMatchViewModel.getAllMatches().observe(this, newMatchList -> {
+        /*mMatchViewModel.getAllMatches().observe(this, newMatchList -> {
             // Update the cached copy of the words in the adapter.
             matchList = newMatchList;
-            convertToMatch();
-            if(key.contentEquals("edit"))
-                InsertValues(view);
-        });
+            //convertToMatch();
+            //if(key.contentEquals("edit"))
+                //InsertValues(view);
+        });*/
 
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
@@ -120,7 +117,7 @@ public class ScorerActivityView extends AppCompatActivity{
         });
     }
 
-    void convertToMatch(){
+    /*void convertToMatch(){
         int matchSize = matchList.size();
         for(int i = 0; i < matchSize; i++){
             if(matchList.get(i).id == matchId){
@@ -128,14 +125,14 @@ public class ScorerActivityView extends AppCompatActivity{
                 break;
             }
         }
-    }
+    }*/
 
     void Delete(){
-        mMatchViewModel.deleteByUserId(matchId);
+        //mMatchViewModel.deleteByUserId(matchId);
         finish();
     }
 
-    public void InsertValues(View view) {
+    /*public void InsertValues(View view) {
         binding.textTeamName.setText(currentMatch.teamName);
         binding.textTeamCode.setText(currentMatch.teamCode);
         if(currentMatch.teamColor.contentEquals("red")) {
@@ -253,5 +250,5 @@ public class ScorerActivityView extends AppCompatActivity{
         binding.textPenaltiesMajorNr.setText(String.format(Locale.US,"%d", penaltiesMajor));
         binding.textTotalNr.setText(String.format(Locale.US, "%d", totalPoints));
 
-    }
+    }*/
 }
