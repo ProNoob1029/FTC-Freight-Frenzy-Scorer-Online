@@ -2,14 +2,18 @@ package com.phoenixro026.ftcfreightfrenzyscoreronline;
 
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.databinding.ActivityScorerBinding;
 
 import java.text.SimpleDateFormat;
@@ -62,13 +66,9 @@ public class ScorerActivity extends AppCompatActivity{
     //Total
     public int totalPoints = 0;
 
-    //private MatchViewModel mMatchViewModel;
-
-    //String key;
-    //int matchId;
-    //List<Match> matchList;
-
-    //Match currentMatch;
+    String key;
+    String matchId;
+    MatchModel match = new MatchModel();
 
     DatabaseReference mRootRef;
     DatabaseReference mMatchesRef;
@@ -82,47 +82,30 @@ public class ScorerActivity extends AppCompatActivity{
 
         Vibrator vib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
-        //mMatchViewModel = new ViewModelProvider(this).get(MatchViewModel.class);
-
-        /*Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         if (extras != null) {
             key = extras.getString("key");
-            matchId = extras.getInt("id");
+            matchId = extras.getString("id");
             //The key argument here must match that used in the other activity
-        }*/
-
-        /*mMatchViewModel.getAllMatches().observe(this, newMatchList -> {
-            // Update the cached copy of the words in the adapter.
-            matchList = newMatchList;
-            convertToMatch();
-            if(key.contentEquals("edit"))
-                InsertValues(view);
-        });*/
+        }
 
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mMatchesRef = mRootRef.child("matches");
 
+        if(key.equals("edit")){
+            mMatchesRef.child(matchId).get().addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    match = task.getResult().getValue(MatchModel.class);
+                    InsertValues(view);
+                }
+            });
+        }
+
         setupOnClick(view, vib);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        /*mMatchesRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String text = snapshot.getValue(String.class);
-
-                binding.textTeamName.setText(text);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
     }
 
     public void setupOnClick(View view, Vibrator myVib){
@@ -420,35 +403,23 @@ public class ScorerActivity extends AppCompatActivity{
         });
 
         binding.buttonSave.setOnClickListener(v -> {
-            //Save();
-            String key = mMatchesRef.push().getKey();
-            MatchModel match = new MatchModel();
-            match.teamName = binding.textTeamName.getText().toString();
-            match.teamCode = binding.textTeamCode.getText().toString();
-            Calendar currentTime = Calendar.getInstance();
-            String min;
-            int calMin = currentTime.get(Calendar.MINUTE);
-            if(calMin < 10)
-                min = String.format(Locale.US, "0%d", calMin);
-            else min = String.format(Locale.US, "%d", calMin);
-            match.createTime = String.format(Locale.US, "%s %d %d:%s", new SimpleDateFormat("MMM", Locale.US).format(currentTime.getTime()), currentTime.get(Calendar.DAY_OF_MONTH), currentTime.get(Calendar.HOUR_OF_DAY), min);
-            Map<String , Object> updates = new HashMap<>();
-            Map<String, Object> map = match.toMap();
-            updates.put(key, map);
-            mMatchesRef.updateChildren(updates);
-            finish();
+            Save();
+            if(!teamName.contentEquals("") && !teamCode.contentEquals("") && !teamColor.contentEquals("")){
+                String newKey;
+                if(key.equals("edit")){
+                    newKey = matchId;
+                }else newKey = mMatchesRef.push().getKey();
+                Map<String , Object> updates = new HashMap<>();
+                Map<String, Object> map = match.toMap();
+                updates.put(newKey, map);
+                mMatchesRef.updateChildren(updates);
+                finish();
+            }else Toast.makeText(
+                    getApplicationContext(),
+                    R.string.empty_not_saved,
+                    Toast.LENGTH_SHORT).show();
         } );
     }
-
-    /*void convertToMatch(){
-        int matchSize = matchList.size();
-        for(int i = 0; i < matchSize; i++){
-            if(matchList.get(i).id == matchId){
-                currentMatch = matchList.get(i);
-                break;
-            }
-        }
-    }*/
 
     public void CalculateAutoPoints() {
         autoTotalPoints = autoStorage * 2 + autoHub * 6;
@@ -504,76 +475,64 @@ public class ScorerActivity extends AppCompatActivity{
         binding.textTotalNr.setText(String.format(Locale.US, "%d", totalPoints));
     }
 
-    /*public void Save() {
+    public void Save() {
         teamName = binding.textTeamName.getText().toString();
         teamCode = binding.textTeamCode.getText().toString();
-        if(!teamName.contentEquals("") && !teamCode.contentEquals("") && !teamColor.contentEquals("")){
-            Match match = new Match();
-            Calendar currentTime = Calendar.getInstance();
-            match.teamName = teamName;
-            match.teamCode = teamCode;
-            match.teamColor = teamColor;
+        Calendar currentTime = Calendar.getInstance();
+        match.teamName = teamName;
+        match.teamCode = teamCode;
+        match.teamColor = teamColor;
 
-            ///Autonomous
-            match.autoTotalPoints = autoTotalPoints;
-            match.duckDelivery = duckDelivery;
-            match.autoStorage = autoStorage;
-            match.autoHub = autoHub;
-            match.freightBonus = freightBonus;
-            match.teamElementUsed = teamElementUsed;
-            match.autoParkedInStorage = autoParkedInStorage;
-            match.autoParkedInWarehouse = autoParkedInWarehouse;
-            match.autoParkedFully = autoParkedFully;
+        ///Autonomous
+        match.autoTotalPoints = autoTotalPoints;
+        match.duckDelivery = duckDelivery;
+        match.autoStorage = autoStorage;
+        match.autoHub = autoHub;
+        match.freightBonus = freightBonus;
+        match.teamElementUsed = teamElementUsed;
+        match.autoParkedInStorage = autoParkedInStorage;
+        match.autoParkedInWarehouse = autoParkedInWarehouse;
+        match.autoParkedFully = autoParkedFully;
 
-            ///Driver
-            match.driverTotalPoints = driverTotalPoints;
-            match.driverStorage = driverStorage;
-            match.driverHubL1 = driverHubL1;
-            match.driverHubL2 = driverHubL2;
-            match.driverHubL3 = driverHubL3;
-            match.driverShared = driverShared;
+        ///Driver
+        match.driverTotalPoints = driverTotalPoints;
+        match.driverStorage = driverStorage;
+        match.driverHubL1 = driverHubL1;
+        match.driverHubL2 = driverHubL2;
+        match.driverHubL3 = driverHubL3;
+        match.driverShared = driverShared;
 
-            ///Endgame
-            match.endgameTotalPoints = endgameTotalPoints;
-            match.carouselDucks = carouselDucks;
-            match.balancedShipping = balancedShipping;
-            match.leaningShared = leaningShared;
-            match.endgameParked = endgameParked;
-            match.endgameFullyParked = endgameFullyParked;
-            match.capping = capping;
+        ///Endgame
+        match.endgameTotalPoints = endgameTotalPoints;
+        match.carouselDucks = carouselDucks;
+        match.balancedShipping = balancedShipping;
+        match.leaningShared = leaningShared;
+        match.endgameParked = endgameParked;
+        match.endgameFullyParked = endgameFullyParked;
+        match.capping = capping;
 
-            //Penalties
-            match.penaltiesTotal = penaltiesTotal;
-            match.penaltiesMinor = penaltiesMinor;
-            match.penaltiesMajor = penaltiesMajor;
+        //Penalties
+        match.penaltiesTotal = penaltiesTotal;
+        match.penaltiesMinor = penaltiesMinor;
+        match.penaltiesMajor = penaltiesMajor;
 
-            //Total
-            match.totalPoints = totalPoints;
+        //Total
+        match.totalPoints = totalPoints;
 
-            if(key.contentEquals("edit")){
-                match.id = currentMatch.id;
-                match.createTime = currentMatch.createTime;
-                mMatchViewModel.update(match);
-            }else {
-                String min;
-                int calMin = currentTime.get(Calendar.MINUTE);
-                if(calMin < 10)
-                    min = String.format(Locale.US, "0%d", calMin);
-                else min = String.format(Locale.US, "%d", calMin);
-                match.createTime = String.format(Locale.US, "%s %d %d:%s", new SimpleDateFormat("MMM", Locale.US).format(currentTime.getTime()), currentTime.get(Calendar.DAY_OF_MONTH), currentTime.get(Calendar.HOUR_OF_DAY), min);
-                mMatchViewModel.insert(match);
-            }
-            finish();
-        }else Toast.makeText(
-                getApplicationContext(),
-                R.string.empty_not_saved,
-                Toast.LENGTH_SHORT).show();
-    }*/
+        if(!key.contentEquals("edit")){
+            String min;
+            int calMin = currentTime.get(Calendar.MINUTE);
+            if(calMin < 10)
+                min = String.format(Locale.US, "0%d", calMin);
+            else min = String.format(Locale.US, "%d", calMin);
+            match.createTime = String.format(Locale.US, "%s %d %d:%s", new SimpleDateFormat("MMM", Locale.US).format(currentTime.getTime()), currentTime.get(Calendar.DAY_OF_MONTH), currentTime.get(Calendar.HOUR_OF_DAY), min);
+        }
+    }
 
-    /*public void InsertValues(View view) {
-        binding.textTeamName.setText(currentMatch.teamName);
-        binding.textTeamCode.setText(currentMatch.teamCode);
-        if(currentMatch.teamColor.contentEquals("red")) {
+    public void InsertValues(View view) {
+        binding.textTeamName.setText(match.teamName);
+        binding.textTeamCode.setText(match.teamCode);
+        if(match.teamColor.contentEquals("red")) {
             binding.buttonTeamRed.setTextAppearance(view.getContext(), R.style.button_theme);
             binding.buttonTeamRed.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.button_shape_red));
             teamColor = "red";
@@ -584,40 +543,40 @@ public class ScorerActivity extends AppCompatActivity{
         }
 
         ///Autonomous
-        autoTotalPoints = currentMatch.autoTotalPoints;
-        duckDelivery = currentMatch.duckDelivery;
-        autoStorage = currentMatch.autoStorage;
-        autoHub = currentMatch.autoHub;
-        freightBonus = currentMatch.freightBonus;
-        teamElementUsed = currentMatch.teamElementUsed;
-        autoParkedInStorage = currentMatch.autoParkedInStorage;
-        autoParkedInWarehouse = currentMatch.autoParkedInWarehouse;
-        autoParkedFully = currentMatch.autoParkedFully;
+        autoTotalPoints = match.autoTotalPoints;
+        duckDelivery = match.duckDelivery;
+        autoStorage = match.autoStorage;
+        autoHub = match.autoHub;
+        freightBonus = match.freightBonus;
+        teamElementUsed = match.teamElementUsed;
+        autoParkedInStorage = match.autoParkedInStorage;
+        autoParkedInWarehouse = match.autoParkedInWarehouse;
+        autoParkedFully = match.autoParkedFully;
 
         ///Driver
-        driverTotalPoints = currentMatch.driverTotalPoints;
-        driverStorage = currentMatch.driverStorage;
-        driverHubL1 = currentMatch.driverHubL1;
-        driverHubL2 = currentMatch.driverHubL2;
-        driverHubL3 = currentMatch.driverHubL3;
-        driverShared = currentMatch.driverShared;
+        driverTotalPoints = match.driverTotalPoints;
+        driverStorage = match.driverStorage;
+        driverHubL1 = match.driverHubL1;
+        driverHubL2 = match.driverHubL2;
+        driverHubL3 = match.driverHubL3;
+        driverShared = match.driverShared;
 
         ///Endgame
-        endgameTotalPoints = currentMatch.endgameTotalPoints;
-        carouselDucks = currentMatch.carouselDucks;
-        balancedShipping = currentMatch.balancedShipping;
-        leaningShared = currentMatch.leaningShared;
-        endgameParked = currentMatch.endgameParked;
-        endgameFullyParked = currentMatch.endgameFullyParked;
-        capping = currentMatch.capping;
+        endgameTotalPoints = match.endgameTotalPoints;
+        carouselDucks = match.carouselDucks;
+        balancedShipping = match.balancedShipping;
+        leaningShared = match.leaningShared;
+        endgameParked = match.endgameParked;
+        endgameFullyParked = match.endgameFullyParked;
+        capping = match.capping;
 
         //Penalties
-        penaltiesTotal = currentMatch.penaltiesTotal;
-        penaltiesMinor = currentMatch.penaltiesMinor;
-        penaltiesMajor = currentMatch.penaltiesMajor;
+        penaltiesTotal = match.penaltiesTotal;
+        penaltiesMinor = match.penaltiesMinor;
+        penaltiesMajor = match.penaltiesMajor;
 
         //Total
-        totalPoints = currentMatch.totalPoints;
+        totalPoints = match.totalPoints;
 
         //Autonomous
         binding.textAutoTotalPointsNr.setText(String.format(Locale.US,"%d", autoTotalPoints));
@@ -663,5 +622,5 @@ public class ScorerActivity extends AppCompatActivity{
         if(endgameParked)
             binding.switchEndgameParkedFully.setVisibility(View.VISIBLE);
 
-    }*/
+    }
 }

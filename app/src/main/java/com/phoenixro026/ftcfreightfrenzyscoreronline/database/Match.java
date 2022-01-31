@@ -6,4 +6,6 @@ public class Match {
     public String teamName;
 
     public String createTime;
+
+    public int points;
 }

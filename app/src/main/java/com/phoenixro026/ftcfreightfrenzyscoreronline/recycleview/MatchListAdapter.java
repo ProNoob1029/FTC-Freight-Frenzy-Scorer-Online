@@ -33,7 +33,7 @@ public class MatchListAdapter extends ListAdapter<Match, MatchViewHolder> {
     @Override
     public void onBindViewHolder(MatchViewHolder holder, int position) {
         Match current = getItem(position);
-        holder.bind(String.format(Locale.US, "%d. %s", position + 1, current.teamName), current.createTime, current.id);
+        holder.bind(String.format(Locale.US, "%d. %s", position + 1, current.teamName), current.createTime, current.id, current.points);
     }
 
     public static class MatchDiff extends DiffUtil.ItemCallback<Match> {

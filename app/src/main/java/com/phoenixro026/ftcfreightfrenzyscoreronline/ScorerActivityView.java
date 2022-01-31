@@ -4,16 +4,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.core.content.ContextCompat;
 
-import com.phoenixro026.ftcfreightfrenzyscoreronline.database.Match;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.databinding.ActivityScorerViewBinding;
 
-import java.util.List;
+import java.util.Locale;
 
 public class ScorerActivityView extends AppCompatActivity{
 
@@ -58,11 +63,11 @@ public class ScorerActivityView extends AppCompatActivity{
     public int totalPoints = 0;
 
     String key;
-    int matchId;
-    List<Match> matchList;
-    //MatchViewModel mMatchViewModel;
+    String matchId;
+    MatchModel match = new MatchModel();
 
-    Match currentMatch;
+    DatabaseReference mRootRef;
+    DatabaseReference mMatchesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,22 +78,40 @@ public class ScorerActivityView extends AppCompatActivity{
 
         Vibrator myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
-        //mMatchViewModel = new ViewModelProvider(this).get(MatchViewModel.class);
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             key = extras.getString("key");
-            matchId = extras.getInt("id");
+            matchId = extras.getString("id");
             //The key argument here must match that used in the other activity
         }
 
-        /*mMatchViewModel.getAllMatches().observe(this, newMatchList -> {
-            // Update the cached copy of the words in the adapter.
-            matchList = newMatchList;
-            //convertToMatch();
-            //if(key.contentEquals("edit"))
-                //InsertValues(view);
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mMatchesRef = mRootRef.child("matches");
+
+        /*mMatchesRef.child(matchId).get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            }
+            else {
+                match = task.getResult().getValue(MatchModel.class);
+                InsertValues(view);
+            }
         });*/
+
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    match = dataSnapshot.getValue(MatchModel.class);
+                    InsertValues(view);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        mMatchesRef.child(matchId).addValueEventListener(postListener);
 
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
@@ -117,25 +140,15 @@ public class ScorerActivityView extends AppCompatActivity{
         });
     }
 
-    /*void convertToMatch(){
-        int matchSize = matchList.size();
-        for(int i = 0; i < matchSize; i++){
-            if(matchList.get(i).id == matchId){
-                currentMatch = matchList.get(i);
-                break;
-            }
-        }
-    }*/
-
     void Delete(){
-        //mMatchViewModel.deleteByUserId(matchId);
+        mMatchesRef.child(matchId).removeValue();
         finish();
     }
 
-    /*public void InsertValues(View view) {
-        binding.textTeamName.setText(currentMatch.teamName);
-        binding.textTeamCode.setText(currentMatch.teamCode);
-        if(currentMatch.teamColor.contentEquals("red")) {
+    public void InsertValues(View view) {
+        binding.textTeamName.setText(match.teamName);
+        binding.textTeamCode.setText(match.teamCode);
+        if(match.teamColor.contentEquals("red")) {
             binding.buttonTeamRed.setTextAppearance(view.getContext(), R.style.button_theme);
             binding.buttonTeamRed.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.button_shape_red));
             binding.buttonTeamBlue.setTextAppearance(view.getContext(), R.style.Theme_FTC_FREIGHTFRENZY_Scorer);
@@ -150,40 +163,40 @@ public class ScorerActivityView extends AppCompatActivity{
         }
 
         ///Autonomous
-        autoTotalPoints = currentMatch.autoTotalPoints;
-        duckDelivery = currentMatch.duckDelivery;
-        autoStorage = currentMatch.autoStorage;
-        autoHub = currentMatch.autoHub;
-        freightBonus = currentMatch.freightBonus;
-        teamElementUsed = currentMatch.teamElementUsed;
-        autoParkedInStorage = currentMatch.autoParkedInStorage;
-        autoParkedInWarehouse = currentMatch.autoParkedInWarehouse;
-        autoParkedFully = currentMatch.autoParkedFully;
+        autoTotalPoints = match.autoTotalPoints;
+        duckDelivery = match.duckDelivery;
+        autoStorage = match.autoStorage;
+        autoHub = match.autoHub;
+        freightBonus = match.freightBonus;
+        teamElementUsed = match.teamElementUsed;
+        autoParkedInStorage = match.autoParkedInStorage;
+        autoParkedInWarehouse = match.autoParkedInWarehouse;
+        autoParkedFully = match.autoParkedFully;
 
         ///Driver
-        driverTotalPoints = currentMatch.driverTotalPoints;
-        driverStorage = currentMatch.driverStorage;
-        driverHubL1 = currentMatch.driverHubL1;
-        driverHubL2 = currentMatch.driverHubL2;
-        driverHubL3 = currentMatch.driverHubL3;
-        driverShared = currentMatch.driverShared;
+        driverTotalPoints = match.driverTotalPoints;
+        driverStorage = match.driverStorage;
+        driverHubL1 = match.driverHubL1;
+        driverHubL2 = match.driverHubL2;
+        driverHubL3 = match.driverHubL3;
+        driverShared = match.driverShared;
 
         ///Endgame
-        endgameTotalPoints = currentMatch.endgameTotalPoints;
-        carouselDucks = currentMatch.carouselDucks;
-        balancedShipping = currentMatch.balancedShipping;
-        leaningShared = currentMatch.leaningShared;
-        endgameParked = currentMatch.endgameParked;
-        endgameFullyParked = currentMatch.endgameFullyParked;
-        capping = currentMatch.capping;
+        endgameTotalPoints = match.endgameTotalPoints;
+        carouselDucks = match.carouselDucks;
+        balancedShipping = match.balancedShipping;
+        leaningShared = match.leaningShared;
+        endgameParked = match.endgameParked;
+        endgameFullyParked = match.endgameFullyParked;
+        capping = match.capping;
 
         //Penalties
-        penaltiesTotal = currentMatch.penaltiesTotal;
-        penaltiesMinor = currentMatch.penaltiesMinor;
-        penaltiesMajor = currentMatch.penaltiesMajor;
+        penaltiesTotal = match.penaltiesTotal;
+        penaltiesMinor = match.penaltiesMinor;
+        penaltiesMajor = match.penaltiesMajor;
 
         //Total
-        totalPoints = currentMatch.totalPoints;
+        totalPoints = match.totalPoints;
 
         //Autonomous
         binding.textAutoTotalPointsNr.setText(String.format(Locale.US,"%d", autoTotalPoints));
@@ -250,5 +263,5 @@ public class ScorerActivityView extends AppCompatActivity{
         binding.textPenaltiesMajorNr.setText(String.format(Locale.US,"%d", penaltiesMajor));
         binding.textTotalNr.setText(String.format(Locale.US, "%d", totalPoints));
 
-    }*/
+    }
 }

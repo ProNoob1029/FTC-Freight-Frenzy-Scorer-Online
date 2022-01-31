@@ -28,15 +28,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.R;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.ScorerActivityView;
 
+import java.util.Locale;
+
 class MatchViewHolder extends RecyclerView.ViewHolder {
     private final TextView matchItemView;
     private final TextView dateItemView;
+    private final TextView pointsItemView;
     private String mMatch;
 
     private MatchViewHolder(View itemView) {
         super(itemView);
         matchItemView = itemView.findViewById(R.id.list_team_name);
         dateItemView = itemView.findViewById(R.id.list_date);
+        pointsItemView = itemView.findViewById(R.id.list_points);
         Context context = itemView.getContext();
         itemView.setOnClickListener(view -> {
             String value="edit";
@@ -44,9 +48,10 @@ class MatchViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void bind(String text, String date, String match) {
+    public void bind(String text, String date, String match, int points) {
         matchItemView.setText(text);
         dateItemView.setText(date);
+        pointsItemView.setText(String.format(Locale.US, "%d pts.", points));
         mMatch = match;
     }
 

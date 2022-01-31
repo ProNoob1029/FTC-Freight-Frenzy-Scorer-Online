@@ -2,8 +2,8 @@ package com.phoenixro026.ftcfreightfrenzyscoreronline;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,8 +20,7 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
-    private DatabaseReference mDatabase;
-    private List<Match> matchList = new ArrayList<>();
+    private final List<Match> matchList = new ArrayList<>();
     public MatchListAdapter adapter;
 
     @Override
@@ -32,9 +31,13 @@ public class ListActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         adapter = new MatchListAdapter(new MatchListAdapter.MatchDiff());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
@@ -43,11 +46,11 @@ public class ListActivity extends AppCompatActivity {
                 MatchModel matchModel = dataSnapshot.getValue(MatchModel.class);
                 Match match = new Match();
                 match.id = dataSnapshot.getKey();
+                assert matchModel != null;
                 match.teamName = matchModel.teamName;
                 match.createTime = matchModel.createTime;
-                List<Match> tempList = matchList;
+                match.points = matchModel.totalPoints;
                 matchList.add(match);
-                adapter.submitList(tempList);
                 adapter.submitList(matchList);
             }
 
@@ -55,14 +58,19 @@ public class ListActivity extends AppCompatActivity {
             public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
                 // A data item has changed
                 if(dataSnapshot.exists()){
+                    MatchModel matchModel = dataSnapshot.getValue(MatchModel.class);
+                    Match match = new Match();
+                    match.id = dataSnapshot.getKey();
+                    assert matchModel != null;
+                    match.teamName = matchModel.teamName;
+                    match.createTime = matchModel.createTime;
+                    match.points = matchModel.totalPoints;
+                    List<Match> tempList = new ArrayList<>(matchList);
                     matchList.clear();
-                    for (DataSnapshot dss:dataSnapshot.getChildren()){
-                        MatchModel matchModel = dss.getValue(MatchModel.class);
-                        Match match = new Match();
-                        match.id = dss.getKey();
-                        match.teamName = matchModel.teamName;
-                        match.createTime = matchModel.createTime;
-                        matchList.add(match);
+                    for (int i = 0; i < tempList.size(); i++){
+                        if(tempList.get(i).id.equals(match.id))
+                            matchList.add(match);
+                        else matchList.add(tempList.get(i));
                     }
                     adapter.submitList(matchList);
                 }
@@ -71,45 +79,28 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+                    Match match = new Match();
+                    match.id = dataSnapshot.getKey();
+                    List<Match> tempList = new ArrayList<>(matchList);
                     matchList.clear();
-                    for (DataSnapshot dss:dataSnapshot.getChildren()){
-                        MatchModel matchModel = dss.getValue(MatchModel.class);
-                        Match match = new Match();
-                        match.id = dss.getKey();
-                        match.teamName = matchModel.teamName;
-                        match.createTime = matchModel.createTime;
-                        matchList.add(match);
+                    for (int i = 0; i < tempList.size(); i++){
+                        if(!tempList.get(i).id.equals(match.id))
+                            matchList.add(tempList.get(i));
                     }
                     adapter.submitList(matchList);
                 }
             }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
-                if(dataSnapshot.exists()){
-                    matchList.clear();
-                    for (DataSnapshot dss:dataSnapshot.getChildren()){
-                        MatchModel matchModel = dss.getValue(MatchModel.class);
-                        Match match = new Match();
-                        match.id = dss.getKey();
-                        match.teamName = matchModel.teamName;
-                        match.createTime = matchModel.createTime;
-                        matchList.add(match);
-                    }
-                    adapter.submitList(matchList);
-                }
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
+
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         };
 
         mDatabase.child("matches").addChildEventListener(childEventListener);
     }
-
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-    }*/
 }
