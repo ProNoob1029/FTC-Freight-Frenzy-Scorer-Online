@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         binding.buttonNew.setOnClickListener(v -> {
             myVib.vibrate(20);
             String value="new";
-            startActivity(new Intent(MainActivity.this, ScorerActivity.class).putExtra("key", value).putExtra("id", 1));
+            startActivity(new Intent(MainActivity.this, ScorerActivity.class).putExtra("key", value).putExtra("id", "1"));
         });
 
         binding.buttonList.setOnClickListener(v -> {
