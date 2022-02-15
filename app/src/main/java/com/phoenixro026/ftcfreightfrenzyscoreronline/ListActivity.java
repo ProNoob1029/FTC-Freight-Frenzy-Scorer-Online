@@ -1,12 +1,19 @@
 package com.phoenixro026.ftcfreightfrenzyscoreronline;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,11 +29,17 @@ public class ListActivity extends AppCompatActivity {
 
     private final List<Match> matchList = new ArrayList<>();
     public MatchListAdapter adapter;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         adapter = new MatchListAdapter(new MatchListAdapter.MatchDiff());
@@ -102,5 +115,33 @@ public class ListActivity extends AppCompatActivity {
         };
 
         mDatabase.child("matches").addChildEventListener(childEventListener);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Check auth on Activity start
+        if (mAuth.getCurrentUser() == null) {
+            startActivity(new Intent(ListActivity.this, com.phoenixro026.ftcfreightfrenzyscoreronline.MainActivity.class));
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int i = item.getItemId();
+        if (i == R.id.action_logout) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(ListActivity.this, com.phoenixro026.ftcfreightfrenzyscoreronline.MainActivity.class));
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sample_main_layout"
-    style="@style/bg_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/list_text_title"
-        style="@style/text_theme"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:backgroundTintMode="src_atop"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/score_match"
-        android:textAlignment="center"
-        android:textAppearance="@style/Theme.FTC_FREIGHTFRENZY_Scorer"
-        android:textSize="34sp"
-        tools:ignore="TextContrastCheck" />
+        android:layout_weight="0">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title='Score Match'
+            app:titleTextAppearance="@style/text_theme"
+            app:titleTextColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

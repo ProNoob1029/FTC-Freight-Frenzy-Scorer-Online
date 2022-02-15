@@ -68,4 +68,9 @@
     <string name="fully">Fully</string>
     <string name="partly">Partly</string>
     <string name="delete">Delete</string>
+    <string name="hint_email">email</string>
+    <string name="hint_password">password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="menu_logout">Log out</string>
 </resources>
