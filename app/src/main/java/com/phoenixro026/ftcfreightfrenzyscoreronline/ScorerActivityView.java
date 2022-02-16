@@ -4,13 +4,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.databinding.ActivityScorerViewBinding;
 
 import java.util.Locale;
+import java.util.Objects;
 
 public class ScorerActivityView extends AppCompatActivity{
 
@@ -66,7 +68,7 @@ public class ScorerActivityView extends AppCompatActivity{
     String matchId;
     MatchModel match = new MatchModel();
 
-    DatabaseReference mRootRef;
+    //DatabaseReference mRootRef;
     DatabaseReference mMatchesRef;
 
     @Override
@@ -85,18 +87,9 @@ public class ScorerActivityView extends AppCompatActivity{
             //The key argument here must match that used in the other activity
         }
 
-        mRootRef = FirebaseDatabase.getInstance().getReference();
-        mMatchesRef = mRootRef.child("matches");
-
-        /*mMatchesRef.child(matchId).get().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.e("firebase", "Error getting data", task.getException());
-            }
-            else {
-                match = task.getResult().getValue(MatchModel.class);
-                InsertValues(view);
-            }
-        });*/
+        final String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        mMatchesRef =
+                FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("matches");
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -108,7 +101,7 @@ public class ScorerActivityView extends AppCompatActivity{
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         };
         mMatchesRef.child(matchId).addValueEventListener(postListener);

@@ -73,4 +73,6 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="menu_logout">Log out</string>
+    <string name="firebase">Firebase</string>
+    <string name="new_match">new</string>
 </resources>

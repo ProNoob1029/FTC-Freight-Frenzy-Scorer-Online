@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.databinding.ActivityScorerBinding;
@@ -18,6 +19,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 public class ScorerActivity extends AppCompatActivity{
 
@@ -67,7 +69,7 @@ public class ScorerActivity extends AppCompatActivity{
     String matchId;
     MatchModel match = new MatchModel();
 
-    DatabaseReference mRootRef;
+    //DatabaseReference mRootRef;
     DatabaseReference mMatchesRef;
 
     @Override
@@ -87,8 +89,11 @@ public class ScorerActivity extends AppCompatActivity{
         }
 
 
-        mRootRef = FirebaseDatabase.getInstance().getReference();
-        mMatchesRef = mRootRef.child("matches");
+        //mRootRef = FirebaseDatabase.getInstance().getReference();
+
+        final String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        mMatchesRef =
+                FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("matches");
 
         if(key.equals("edit")){
             mMatchesRef.child(matchId).get().addOnCompleteListener(task -> {

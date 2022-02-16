@@ -3,81 +3,169 @@ package com.phoenixro026.ftcfreightfrenzyscoreronline;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.phoenixro026.ftcfreightfrenzyscoreronline.database.Match;
 import com.phoenixro026.ftcfreightfrenzyscoreronline.databinding.ActivityMainBinding;
+import com.phoenixro026.ftcfreightfrenzyscoreronline.recycleview.MatchListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    protected ActivityMainBinding binding;
+    private final List<Match> matchList = new ArrayList<>();
+    public MatchListAdapter adapter;
+    private FirebaseAuth mAuth;
 
-    private FloatingActionButton fab;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(binding.getRoot());
 
         Vibrator myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
-        binding.buttonNew.setOnClickListener(v -> {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        adapter = new MatchListAdapter(new MatchListAdapter.MatchDiff());
+        recyclerView.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+
+
+
+
+
+
+
+        binding.fab.setOnClickListener(v -> {
             myVib.vibrate(20);
             String value="new";
             startActivity(new Intent(MainActivity.this, ScorerActivity.class).putExtra("key", value).putExtra("id", "1"));
         });
-
-        binding.buttonList.setOnClickListener(v -> {
-            myVib.vibrate(20);
-            startActivity(new Intent(MainActivity.this, com.phoenixro026.ftcfreightfrenzyscoreronline.ListActivity.class));
-        });*/
-
-
-
-        super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-
-        fab = binding.fab;
-        fab.setVisibility(View.GONE);
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.nav_host_fragment, SignInFragment.class, null)
-                    .commit();
-        }
-
-        /*navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        navController.setGraph(R.navigation.nav_graph_java);
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if (destination.getId() == R.id.MainFragment) {
-                    fab.setVisibility(View.VISIBLE);
-                    fab.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            navController.navigate(R.id.action_MainFragment_to_NewPostFragment);
-                        }
-                    });
-                } else {
-                    fab.setVisibility(View.GONE);
-                }
-            }
-        });*/
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                // A new data item has been added, add it to the list
+                MatchModel matchModel = dataSnapshot.getValue(MatchModel.class);
+                Match match = new Match();
+                match.id = dataSnapshot.getKey();
+                assert matchModel != null;
+                match.teamName = matchModel.teamName;
+                match.createTime = matchModel.createTime;
+                match.points = matchModel.totalPoints;
+                matchList.add(match);
+                adapter.submitList(matchList);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+                // A data item has changed
+                if(dataSnapshot.exists()){
+                    MatchModel matchModel = dataSnapshot.getValue(MatchModel.class);
+                    Match match = new Match();
+                    match.id = dataSnapshot.getKey();
+                    assert matchModel != null;
+                    match.teamName = matchModel.teamName;
+                    match.createTime = matchModel.createTime;
+                    match.points = matchModel.totalPoints;
+                    List<Match> tempList = new ArrayList<>(matchList);
+                    matchList.clear();
+                    for (int i = 0; i < tempList.size(); i++){
+                        if(tempList.get(i).id.equals(match.id))
+                            matchList.add(match);
+                        else matchList.add(tempList.get(i));
+                    }
+                    adapter.submitList(matchList);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    Match match = new Match();
+                    match.id = dataSnapshot.getKey();
+                    List<Match> tempList = new ArrayList<>(matchList);
+                    matchList.clear();
+                    for (int i = 0; i < tempList.size(); i++){
+                        if(!tempList.get(i).id.equals(match.id))
+                            matchList.add(tempList.get(i));
+                    }
+                    adapter.submitList(matchList);
+                }
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        };
+
+        // Check auth on Activity start
+        if (mAuth.getCurrentUser() == null) {
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        }else{
+            final String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+            DatabaseReference mDatabase =
+                    FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+
+            matchList.clear();
+            mDatabase.child("matches").addChildEventListener(childEventListener);
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int i = item.getItemId();
+        if (i == R.id.action_logout) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
 }

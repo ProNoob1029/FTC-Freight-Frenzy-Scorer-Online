@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FTC_FREIGHTFRENZY_Scorer">
         <activity
-            android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.MainActivity"
+            android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.ScorerActivity"
             android:configChanges="orientation|screenSize">
         </activity>
-        <activity android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.ListActivity" />
+        <activity android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.MainActivity" />
         <activity android:name="com.phoenixro026.ftcfreightfrenzyscoreronline.ScorerActivityView" />
     </application>
 
