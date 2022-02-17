@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FTC Scorer Online</string>
+    <string name="app_name">FTC Scorer</string>
     <string name="phoenix_ro_026" translatable="false">Phoenix RO-026</string>
     <string name="phoenix_logo">phoenix logo</string>
     <string name="button_new">New</string>
@@ -75,4 +75,6 @@
     <string name="menu_logout">Log out</string>
     <string name="firebase">Firebase</string>
     <string name="new_match">new</string>
+    <string name="change_password">Change password</string>
+    <string name="change_email">Change email</string>
 </resources>

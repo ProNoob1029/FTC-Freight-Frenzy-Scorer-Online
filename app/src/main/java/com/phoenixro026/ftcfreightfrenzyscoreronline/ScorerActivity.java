@@ -1,5 +1,6 @@
 package com.phoenixro026.ftcfreightfrenzyscoreronline;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -87,9 +88,6 @@ public class ScorerActivity extends AppCompatActivity{
             matchId = extras.getString("id");
             //The key argument here must match that used in the other activity
         }
-
-
-        //mRootRef = FirebaseDatabase.getInstance().getReference();
 
         final String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         mMatchesRef =

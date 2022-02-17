@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.phoenixro026.ftc_freight_frenzy_scorer.ScorerActivity">
+    tools:context="com.phoenixro026.ftcfreightfrenzyscoreronline.ScorerActivity">
 
     <ScrollView
         android:layout_width="0dp"
