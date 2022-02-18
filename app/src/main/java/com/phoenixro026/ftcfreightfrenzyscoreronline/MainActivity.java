@@ -1,5 +1,6 @@
 package com.phoenixro026.ftcfreightfrenzyscoreronline;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +21,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         Vibrator myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mAuth = FirebaseAuth.getInstance();
@@ -102,16 +101,26 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else {
                             String emailAddress = task.getResult().getValue(String.class);
+                            assert emailAddress != null;
                             mAuth.sendPasswordResetEmail(emailAddress)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                hideProgressBar();
-                                                Log.d(TAG, "Email sent.");
-                                                mAuth.signOut();
-                                                startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                                            }
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            hideProgressBar();
+                                            Log.d(TAG, "Email sent.");
+                                            mAuth.signOut();
+                                            Toast.makeText(
+                                                    getApplicationContext(),
+                                                    "Email sent",
+                                                    Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                                        }else{
+                                            hideProgressBar();
+                                            Toast.makeText(
+                                                    getApplicationContext(),
+                                                    "Please sign in and try again!",
+                                                    Toast.LENGTH_SHORT).show();
+                                            mAuth.signOut();
+                                            startActivity(new Intent(MainActivity.this, SignInActivity.class));
                                         }
                                     });
                         }
@@ -130,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+
+        matchList.clear();
+        adapter.submitList(matchList);
 
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
@@ -201,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
             mDatabase =
                     FirebaseDatabase.getInstance().getReference().child("users").child(userId);
 
-            matchList.clear();
+
             mDatabase.child("matches").addChildEventListener(childEventListener);
         }
 
@@ -213,16 +225,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int i = item.getItemId();
-        /*if (i == R.id.action_logout) {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(MainActivity.this, SignInActivity.class));
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }*/
 
         switch (i){
             case R.id.action_logout:
@@ -260,18 +266,14 @@ public class MainActivity extends AppCompatActivity {
         layoutName.addView(editTextName1); // displays the user input bar
         alertName.setView(layoutName);
 
-        alertName.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                txt = editTextName1; // variable to collect user input
-                collectInput(); // analyze input (txt) in this method
-            }
+        alertName.setPositiveButton("Continue", (dialog, whichButton) -> {
+            txt = editTextName1; // variable to collect user input
+            collectInput(); // analyze input (txt) in this method
         });
 
-        alertName.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                dialog.cancel(); // closes dialog
-                 // display the dialog
-            }
+        alertName.setNegativeButton("Cancel", (dialog, whichButton) -> {
+            dialog.cancel(); // closes dialog
+             // display the dialog
         });
 
         alertName.show();
@@ -286,17 +288,20 @@ public class MainActivity extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
             showProgressBar();
-            user.updateEmail(getInput)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "User email address updated.");
-                                hideProgressBar();
-                                mAuth.signOut();
-                                startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                            }
+            Objects.requireNonNull(user).updateEmail(getInput)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User email address updated.");
+                            hideProgressBar();
+                        }else{
+                            hideProgressBar();
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "Please sign in and try again!",
+                                    Toast.LENGTH_SHORT).show();
                         }
+                        mAuth.signOut();
+                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
                     });
         }
     }

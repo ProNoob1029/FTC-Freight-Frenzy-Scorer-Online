@@ -76,7 +76,7 @@ public class SignInActivity extends AppCompatActivity {
                     hideProgressBar();
 
                     if (task.isSuccessful()) {
-                        finish();
+                        onAuthSuccess(task.getResult().getUser());
                     } else {
                         Toast.makeText(getApplicationContext(), "Sign In Failed",
                                 Toast.LENGTH_SHORT).show();
@@ -148,7 +148,8 @@ public class SignInActivity extends AppCompatActivity {
     private void writeNewUser(String userId, String name, String email) {
         User user = new User(name, email);
 
-        mDatabase.child("users").child(userId).setValue(user);
+        mDatabase.child("users").child(userId).child("email").setValue(user.email);
+        mDatabase.child("users").child(userId).child("username").setValue(user.username);
     }
 
     @Override
