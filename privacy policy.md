@@ -1,4 +1,4 @@
-## Shake Alarm Clock: Privacy policy
+## FTC Scorer: Privacy policy
 
 Welcome to the FTC Scorer app for Android!
 
