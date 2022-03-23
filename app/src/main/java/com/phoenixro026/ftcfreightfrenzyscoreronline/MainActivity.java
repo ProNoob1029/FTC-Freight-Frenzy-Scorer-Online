@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void hideProgressBar() {
-        binding.progressBarMain.setVisibility(View.INVISIBLE);
+        binding.progressBarMain.setVisibility(View.GONE);
     }
 
     @Override
