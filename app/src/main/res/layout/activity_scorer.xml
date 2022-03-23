@@ -49,7 +49,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/button_shape"
+                    android:background="@drawable/button_shape_dark"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -71,7 +71,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/button_shape"
+                    android:background="@drawable/button_shape_dark"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -216,11 +216,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_auto_storage_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -235,11 +234,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_auto_hub_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -254,11 +252,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_auto_storage_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -273,11 +270,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_auto_hub_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -647,11 +643,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_storage_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -666,11 +661,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_hub_l1_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -685,11 +679,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_hub_l2_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -704,11 +697,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_hub_l3_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -723,11 +715,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_shared_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -742,12 +733,11 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_storage_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -762,12 +752,11 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_hub_l1_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -782,12 +771,11 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_hub_l2_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -802,12 +790,11 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_hub_l3_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -822,13 +809,12 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_driver_shared_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -1037,11 +1023,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_endgame_carousel_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -1056,11 +1041,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_endgame_capping_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -1075,12 +1059,11 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_endgame_carousel_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -1095,13 +1078,12 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_endgame_capping_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -1201,13 +1183,12 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_penalties_major_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -1260,11 +1241,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_penalties_minor_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -1279,11 +1259,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_penalties_major_minus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -1298,12 +1277,11 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_penalties_minor_plus"
-                    style="@style/text_theme"
+                    style="@style/button_theme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_shape"
                     android:backgroundTintMode="add"
                     android:clickable="true"
                     android:focusable="true"
@@ -1363,14 +1341,13 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_save"
-                style="@style/text_theme"
+                style="@style/button_theme"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/button_shape"
                 android:backgroundTintMode="add"
                 android:clickable="true"
                 android:focusable="true"

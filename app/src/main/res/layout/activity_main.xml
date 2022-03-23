@@ -54,12 +54,15 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
+        style="@style/button_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:layout_weight="0"
+        android:background="@color/white"
         android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTintMode="add"
         android:contentDescription="@string/new_match"
         app:srcCompat="@drawable/ic_image_edit"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />

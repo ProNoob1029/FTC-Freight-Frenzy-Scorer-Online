@@ -3,18 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/drawable/ic_launcher_phoenix_vector_foreground.xml" value="0.193" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/drawable/ic_phoenix_logo.xml" value="0.193" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/drawable/button_shape.xml" value="0.2735" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/drawable/button_shape_blue.xml" value="0.2735" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/drawable/button_shape_dark.xml" value="0.2735" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/drawable/button_shape_light.xml" value="0.2735" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/drawable/button_shape_red.xml" value="0.2735" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/layout/activity_list.xml" value="0.26875" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/layout/activity_main.xml" value="0.26875" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/layout/activity_scorer.xml" value="0.26875" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/layout/activity_scorer_view.xml" value="0.26875" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/layout/activity_signin.xml" value="0.26875" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/layout/fragment_sign_in.xml" value="0.26875" />
+        <entry key="..\:/Android_Studio/Projects/FTC-Freight-Frenzy-Scorer-Online/app/src/main/res/layout/text_row_item.xml" value="0.26875" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/drawable/list_bg.xml" value="0.2203125" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/layout/activity_list.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/layout/activity_scorer.xml" value="0.2535575679172057" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/layout/activity_scorer_view.xml" value="0.33" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/layout/activity_signin.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/layout/fragment_sign_in.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/layout/text_row_item.xml" value="0.12987012987012986" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/menu/menu_main.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/mipmap-anydpi-v26/ic_launcher_phoenix_vector.xml" value="0.193" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FTCFreightFrenzyScorerOnline/app/src/main/res/layout/activity_scorer.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
